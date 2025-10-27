@@ -1,0 +1,738 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FSS HALLOWEEN FANCY RUN 2025 — ประกาศรายชื่อ</title>
+  <meta name="description" content="หน้าประกาศรายชื่อผู้สมัคร FSS Halloween Fancy Run 2025 พร้อมระบบค้นหาและกรองประเภท" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg:#0b0b0c; --card:#15151a; --ink:#eef1f6; --muted:#9aa4b2; --brand:#ff7a00; --brand2:#a855f7; }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font-family:"Prompt",system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Noto Sans Thai",sans-serif;background:radial-gradient(1200px 600px at 10% -10%,rgba(255,122,0,.20),transparent 60%),radial-gradient(900px 400px at 110% 0%,rgba(168,85,247,.18),transparent 60%),var(--bg);color:var(--ink)}
+    .wrap{max-width:1100px;margin:0 auto;padding:24px}
+    header{display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+    .title{display:flex;gap:14px;align-items:center}
+    .badge{padding:6px 10px;border-radius:999px;background:linear-gradient(90deg,var(--brand),var(--brand2));font-weight:600}
+    h1{margin:0;font-size:clamp(22px,2.6vw,36px);letter-spacing:.5px}
+    .panel{margin-top:16px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);backdrop-filter:blur(6px);border-radius:16px}
+    .controls{display:grid;grid-template-columns:1.2fr 220px auto auto auto;gap:12px;padding:14px}
+    input,select,button{width:100%;padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:#101015;color:var(--ink);outline:none}
+    input::placeholder{color:#8892a3}
+    button{cursor:pointer;background:linear-gradient(90deg,rgba(255,122,0,.9),rgba(168,85,247,.9));border:none;font-weight:600}
+    button.secondary{background:#1a1a20;border:1px solid rgba(255,255,255,.12)}
+    .stats{display:flex;gap:16px;flex-wrap:wrap;padding:0 14px 14px}
+    .stat{background:#101015;border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:10px 12px;color:var(--muted)}
+    .stat strong{color:var(--ink)}
+    table{width:100%;border-collapse:separate;border-spacing:0;margin-top:8px}
+    thead th{position:sticky;top:0;background:#0f0f14;border-bottom:1px solid rgba(255,255,255,.12);text-align:left;padding:12px;font-weight:600}
+    tbody td{padding:12px;border-bottom:1px dashed rgba(255,255,255,.08)}
+    tbody tr:hover{background:rgba(255,255,255,.03)}
+    .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(168,85,247,.14);border:1px solid rgba(168,85,247,.35)}
+    .footer{color:var(--muted);font-size:14px;padding:20px;text-align:center}
+    .tag{font-size:12px;color:#cdd6e4;background:#1b1b22;border:1px solid rgba(255,255,255,.08);padding:4px 8px;border-radius:999px}
+    .pager{display:flex;gap:8px;justify-content:center;padding:16px}
+    .pager button{width:auto;padding:8px 12px}
+    details.tests{margin-top:10px}
+    .test-pass{color:#22c55e}
+    .test-fail{color:#ef4444}
+    @media (max-width:900px){.controls{grid-template-columns:1fr 1fr 1fr;}.controls>button{grid-column:auto / span 1}}
+    @media (max-width:640px){.controls{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="title">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 2l2.39 4.84L20 8l-4 3.9.95 5.53L12 15.77 7.05 17.43 8 13.9 4 10l5.61-1.16L12 2z" fill="url(#g)"/><defs><linearGradient id="g" x1="0" y1="0" x2="24" y2="24"><stop stop-color="#ff7a00"/><stop offset="1" stop-color="#a855f7"/></linearGradient></defs></svg>
+        <div>
+          <div class="badge">FSS HALLOWEEN FANCY RUN 2025</div>
+          <h1>ประกาศรายชื่อผู้สมัคร & ระบบค้นหา</h1>
+        </div>
+      </div>
+      <div class="tag" id="totalTag">รวม 0 รายชื่อ</div>
+    </header>
+
+    <section class="panel">
+      <div class="controls">
+        <input id="q" type="search" placeholder="พิมพ์ค้นหาชื่อหรือนามสกุล... (ไทย/อังกฤษ)" />
+        <select id="cat">
+          <option value="">ทุกประเภทผู้สมัคร</option>
+        </select>
+        <button id="btnClear" class="secondary" title="ล้างตัวกรอง">ล้างตัวกรอง</button>
+        <button id="btnExport" class="secondary" title="ส่งออกผลลัพธ์เป็น CSV">ส่งออก CSV</button>
+        <button id="btnPrint" title="พิมพ์หน้า/บันทึกเป็น PDF">พิมพ์</button>
+      </div>
+      <div class="stats" id="stats"></div>
+      <div style="overflow:auto; max-height:70vh;">
+        <table id="tbl">
+          <thead>
+            <tr>
+              <th style="width:80px">#</th>
+              <th>ชื่อ-นามสกุล</th>
+              <th style="width:320px">ประเภทผู้สมัคร</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="pager" id="pager"></div>
+    </section>
+
+    <details class="tests">
+      <summary>Unit Tests (เปิดดูผลทดสอบ)</summary>
+      <ul id="testList"></ul>
+    </details>
+
+    <div class="footer">จัดทำโดย คณะสังคมศาสตร์ มหาวิทยาลัยนเรศวร</div>
+  </div>
+
+<script>
+// ====== DATA (แปลงจากไฟล์ที่แนบ) ======
+// ฝังข้อมูลเป็น TSV แล้วแปลงเป็นอาร์เรย์ของอ็อบเจ็กต์ในฝั่งเบราว์เซอร์
+const RAW_TSV = `Guest first name	Guest last name	4. ประเภทผู้รับสมัคร (Applicant Categories)
+Kitti	Santipong	บุคคลทั่วไป
+ประไพพรรณ	สายวงค์ปัญญา	บุคคลทั่วไป
+ธีรศักดิ์	ปานสุวรรณ	บุคคลทั่วไป
+Chonnawee	Hongphuy	บุคคลทั่วไป
+นิตย์รดี	ยายอด	บุคลากรมหาวิทยาลัยนเรศวร
+ขจรเกียรติ	มาอินทร์	บุคคลทั่วไป
+กิตติชัย	พองคำ	บุคคลทั่วไป
+ธนบดี	ยายอด	บุคคลทั่วไป
+Sathiyabbriya	Kodeswaranathan	นิสิตมหาวิทยาลัยนเรศวร
+กรธวัช	ชาลีวัน	บุคคลทั่วไป
+เจษฎาภรณ์	จินตปัญญา	บุคคลทั่วไป
+พัลลภา	พันธุ์เพชร	บุคคลทั่วไป
+จีรพงศ์	ทองกรณ์	บุคคลทั่วไป
+ธัชทอง	จงพลวิเศษ	บุคคลทั่วไป
+พีรพล	สุวรรณรัตน์	บุคลากรมหาวิทยาลัยนเรศวร
+ศิริพร	จำเริญ	บุคคลทั่วไป
+วรพล	พันธุ์พืช	บุคคลทั่วไป
+Siwaporn	Sapsin	บุคคลทั่วไป
+SIRIPORN	BOONKOED	บุคคลทั่วไป
+ขวัญหล้า	พรชัย	บุคคลทั่วไป
+อนัญญา	จาร์วิส	บุคลากรมหาวิทยาลัยนเรศวร
+กอบแก้ว	สดโพธิ์	บุคคลทั่วไป
+นายธนเทพ	คำมี	บุคคลทั่วไป
+นนทชัย	กลิ่นแย้ม	บุคคลทั่วไป
+นาฏยา	เพ็ชรบัว	บุคคลทั่วไป
+กัณต์กวี	วิมุติ	บุคลากรมหาวิทยาลัยนเรศวร
+กิตติพล	นิราชภัย	บุคคลทั่วไป
+มะลิวรรณ	นิ่มงามศรี	บุคคลทั่วไป
+อังสนา	โพธิ์พะนา	บุคคลทั่วไป
+กุลนิษฐ์	พิมพ์สุข	บุคคลทั่วไป
+Wikorn	Nunnak	บุคคลทั่วไป
+คณิติน	ธนสัมบันน์	บุคคลทั่วไป
+พลอย	คงรุ่งจรัส	นิสิตมหาวิทยาลัยนเรศวร
+Suphakit	Kamintakool	บุคคลทั่วไป
+ศักดิธัช	มณเฑียรอาจ	นิสิตมหาวิทยาลัยนเรศวร
+ภัทร	เสริมสุข	บุคคลทั่วไป
+วิดารัตน์	สาระรัมย์	บุคคลทั่วไป
+เมษนี	สมประสงค์	บุคลากรมหาวิทยาลัยนเรศวร
+นภพล	เปลี่ยนวงค์	นิสิตคณะสังคมศาสตร์
+Sararat	Kaewpoka	บุคคลทั่วไป
+ภูวดล	ผิวชอุ่ม	บุคคลทั่วไป
+พนิดา	วิรัช​กุล​	บุคคลทั่วไป
+ปุณิกา	ชูศรศิริกุล	บุคลากรคณะสังคมศาสตร์
+ยลดา	มีรอด	บุคคลทั่วไป
+ธนกฤต	ชูศรศิริกุล	บุคคลทั่วไป
+ปวิช	ชูศรศิริกุล	บุคคลทั่วไป
+นาย เฉลิมชัย	พิมสอน	บุคคลทั่วไป
+สาวิตรี	ไฝขันธ์	บุคคลทั่วไป
+Jittaporn	เพิ่มเจริญ	บุคคลทั่วไป
+พัชรินทร์	อ่อนจันทร์	บุคคลทั่วไป
+วิสาข์	สุพรรณไพบูลย์	บุคลากรมหาวิทยาลัยนเรศวร
+ปวีณา	จุ้ยปาน	บุคคลทั่วไป
+พิชญา	หอมสะอาด	บุคคลทั่วไป
+นางสาวรัตนา	วันบู้	บุคลากรคณะสังคมศาสตร์
+Piyanuch	Suntiphada	บุคคลทั่วไป
+มาลิตา	สันติภาดา	บุคคลทั่วไป
+โบนิตา	สันติภาดา	บุคคลทั่วไป
+ด.ญ.ปุณณภา	ก๊กมาศ	บุคคลทั่วไป
+กรวิภา	วชิระนิเวศ	บุคคลทั่วไป
+Kraipon	Pakdeepuwanart	บุคลากรมหาวิทยาลัยนเรศวร
+เวชิรา	วชิระนิเวศ	บุคคลทั่วไป
+มนตรี	ก๊กมาศ	บุคคลทั่วไป
+วาชรี	วชิระนิเวศ	บุคคลทั่วไป
+กำพล	พ่วงรอด	บุคคลทั่วไป
+Chanthonrat	Sitthiworanan	บุคลากรมหาวิทยาลัยนเรศวร
+ศุภชัย	เครื่องชนะ	บุคคลทั่วไป
+ธนัทพล	ยอดมีกลิ่น	บุคคลทั่วไป
+Audcharinya	Intanasilsakul	บุคคลทั่วไป
+สมประสงค์	ศักดิ์การินทร์กุล	บุคคลทั่วไป
+อังวิสุทธิ	ศรีบุญเพ็ง	บุคคลทั่วไป
+ศิวพร	ทองเพชร	บุคคลทั่วไป
+ลัทธพล	ทองเพชร	บุคคลทั่วไป
+Pawit	Ploykaew	บุคคลทั่วไป
+Natthaluk	Thippakdee	นิสิตมหาวิทยาลัยนเรศวร
+ปาริชาติ	ทนุเสริม	บุคคลทั่วไป
+ภัทรพล	กระต่ายทอง	บุคคลทั่วไป
+ุนายจีรวิทย์	พงศ์วรเวชกุล	บุคคลทั่วไป
+เด็กชายณัฐพล	พงศ์วรเวชกุล	บุคคลทั่วไป
+เด็กชายพชร	พงศ์วรเวชกุล	บุคคลทั่วไป
+ศุภโชค	บุญมาก	บุคคลทั่วไป
+แสงสุริยะ	ถุงทรัพย์	บุคคลทั่วไป
+ปรัชญา	ปัญญาประดิษฐ์	นิสิตคณะสังคมศาสตร์
+ธีรสิทธิ์	โตสมบัติ	บุคคลทั่วไป
+เดชดำรงค์	สนศิริ	บุคคลทั่วไป
+Rattanawalai	Visetklin	บุคคลทั่วไป
+Thanawat	Samosorn	นิสิตคณะสังคมศาสตร์
+พิสิษฐ์	ขันโทมุข	นิสิตคณะสังคมศาสตร์
+นายสุรชาติ	มลวัง	นิสิตคณะสังคมศาสตร์
+พรรษา	สุนาวี	บุคคลทั่วไป
+WORASAK	KAEWKONG	บุคลากรมหาวิทยาลัยนเรศวร
+สุภาพร	ล้ำเบิศธ	บุคลากรมหาวิทยาลัยนเรศวร
+Sophit	Khanthawong	บุคลากรมหาวิทยาลัยนเรศวร
+พัฒนพันธ์	กลิ่นหอม	บุคลากรมหาวิทยาลัยนเรศวร
+ญารัชนี	หม่องนันท์	บุคลากรมหาวิทยาลัยนเรศวร
+ปาริฉัตร	เบ้าชัย	บุคคลทั่วไป
+นพดล	ใจคง	บุคคลทั่วไป
+วิทวัส	วัฒนกุลชัย	บุคคลทั่วไป
+Kanda	Nutmode	บุคคลทั่วไป
+นางสาวปณิดา	สุวรรณภพ	นิสิตคณะสังคมศาสตร์
+ณภัทร	พลสิน	นิสิตมหาวิทยาลัยนเรศวร
+ณัชพล	วินัยโรจน์	นิสิตคณะสังคมศาสตร์
+ด.ญ.นภัสสร	หมอนคำ	บุคคลทั่วไป
+อรัญญา	ชื่นจุ้ย	นิสิตมหาวิทยาลัยนเรศวร
+ธนภูมิ	ปานเมฆ	บุคลากรมหาวิทยาลัยนเรศวร
+ด.ญ.วิสสุตา	ไม้ส้มซ่า	บุคคลทั่วไป
+ด.ญ วิชญา	ไม้ส้มซ่า	บุคคลทั่วไป
+นางสาวพรพรรณ	เนตรมุข	บุคคลทั่วไป
+นายบรรพต	ไม้ส้มซ่า	บุคคลทั่วไป
+ชนาธิป	แสงวัฒนานนท์	บุคคลทั่วไป
+ปรินทร์	ปานนิล	บุคคลทั่วไป
+เนตรชนก	พันอิน	บุคคลทั่วไป
+อรนันท์	เกิดพินธ์	บุคลากรมหาวิทยาลัยนเรศวร
+อุดมศักดิ์	กลัยบุตร	บุคคลทั่วไป
+Chanatip	Munkong	บุคคลทั่วไป
+เมธพนธ์	รอดทอง	บุคคลทั่วไป
+จิราภรณ์	พงษ์ปลื้ม	บุคลากรมหาวิทยาลัยนเรศวร
+ณัชชา	พงษ์ปลื้ม	บุคคลทั่วไป
+สิริพรรณ(Siriphan)	สร้อยสุวรรณ	บุคคลทั่วไป
+บัวชมพู	กองกันภัย	นิสิตมหาวิทยาลัยนเรศวร
+ภราดร	คล้ายจินดา	บุคคลทั่วไป
+วันเฉลิม	คงหิรัญ	บุคคลทั่วไป
+ชาญวิทย์	ประสิทธิ์เขตกิจ	บุคคลทั่วไป
+ปรียวัฒน์	รักสวย	บุคคลทั่วไป
+จักรกริช	ศรีประถม	บุคลากรมหาวิทยาลัยนเรศวร
+ศุภชัย	พูลสวัสดิ์	บุคคลทั่วไป
+สุธามาศ	พูลสวัสดิ์	บุคคลทั่วไป
+ธัญญารัตน์	อินทร์เมือง	บุคลากรมหาวิทยาลัยนเรศวร
+ปรียา	ลี้สกุล	บุคลากรมหาวิทยาลัยนเรศวร
+Rungthiwa	Thira	บุคลากรมหาวิทยาลัยนเรศวร
+ธีร์วรา	เสนชุ่ม	บุคลากรมหาวิทยาลัยนเรศวร
+กิ่งเกศ	วันเพ็ง	บุคคลทั่วไป
+เจษฎากร	เจริญผล	บุคคลทั่วไป
+สิริประภา	คุ้มแพทย์	บุคคลทั่วไป
+วันชนะ	ลิ้มสุวรรณ	บุคคลทั่วไป
+จริญญา	แบนไทย	บุคคลทั่วไป
+จันทรกานต์	สุ่มยศ	บุคคลทั่วไป
+Pornpan	Inta	บุคลากรมหาวิทยาลัยนเรศวร
+นาย กุญช์ธนภัทรณ์	ขำแก้ว	บุคคลทั่วไป
+kanokphan	Kham in	นิสิตมหาวิทยาลัยนเรศวร
+ณิชกุล	จีนนิกุล	บุคคลทั่วไป
+จิราภร	แสนทวีสุข	บุคลากรคณะสังคมศาสตร์
+ชวิศ	จีนนิกุล	บุคคลทั่วไป
+วุฒิชัย	รติวทัญญู	บุคคลทั่วไป
+อภัสนันท์	ทานะ	บุคลากรคณะสังคมศาสตร์
+ชนิภรณ์	จันทร์ดำ	ศิษย์เก่าคณะสังคมศาสตร์
+กานต์ธีรา	สุขเจริญ	ศิษย์เก่ามหาวิทยาลัยนเรศวร
+พงษ์ศักดิ์	สารเจริญ	บุคคลทั่วไป
+อรนุช	สารเจริญ	บุคคลทั่วไป
+ณัฐวัตร	ประวันรัมย์	บุคคลทั่วไป
+กฤษณ์	ตันตนะรัตน์	บุคลากรมหาวิทยาลัยนเรศวร
+เชาวลิต	จีนน้ําใส	บุคคลทั่วไป
+RUNGNAPA	NAKBUREE	บุคคลทั่วไป
+อภิญญา	เกตุแก้ว	บุคคลทั่วไป
+พันเอก ธนะพันธ์	ขำทวี	ศิษย์เก่าคณะสังคมศาสตร์
+นาง ดารารัตน์	ขำทวี [ น้อยพันธ์ ]	บุคคลทั่วไป
+พงศกร	พุฒิปกรณ์สกุล	บุคลากรมหาวิทยาลัยนเรศวร
+กัลยาลักษณ์	มาทำมา	ศิษย์เก่ามหาวิทยาลัยนเรศวร
+สุภาวดี	ม้วนทอง	บุคลากรมหาวิทยาลัยนเรศวร
+อภิญญา	น้อยทำ	บุคลากรมหาวิทยาลัยนเรศวร
+นุชนาจ	แจ่มขำ	บุคลากรมหาวิทยาลัยนเรศวร
+ทรงพล	ชุมนุมวัฒน์	บุคลากรมหาวิทยาลัยนเรศวร
+อทิติ	เอี่ยมสงคราม	บุคลากรมหาวิทยาลัยนเรศวร
+นางสาววรรณชา	นครคำ	บุคลากรมหาวิทยาลัยนเรศวร
+นายอภิชาติ	เอี่ยมตาล	บุคคลทั่วไป
+Siripond	Khattiya	บุคลากรมหาวิทยาลัยนเรศวร
+SURACHET	AMKHAM	บุคลากรมหาวิทยาลัยนเรศวร
+พชร	เดชาสิริบูรณ์	ศิษย์เก่ามหาวิทยาลัยนเรศวร
+นางสาวภิรนิตย์	ลบลม	บุคลากรมหาวิทยาลัยนเรศวร
+พรปวีณ์	แถวอุทุม1	บุคคลทั่วไป
+รติมา	ปลื้มบุญ	นิสิตมหาวิทยาลัยนเรศวร
+อรวรรณ	เนตาทิพย์	บุคคลทั่วไป
+นายศิษฐ์ภัณฑ์	แคนลา	บุคลากรมหาวิทยาลัยนเรศวร
+ดญ.พรพรหมพรรณ	แคนลา	บุคคลทั่วไป
+ดญ.พรนวพรหม	แคนลา	บุคคลทั่วไป
+นพพรท	ผันพักตร์​	นิสิตมหาวิทยาลัยนเรศวร
+พีรณัท	สายคำทอน	บุคคลทั่วไป
+วรารัตน์	สายคำทอน	บุคคลทั่วไป
+อริญชย์	พลาพล	นิสิตมหาวิทยาลัยนเรศวร
+พิริยะ	สายคำทอน	ศิษย์เก่ามหาวิทยาลัยนเรศวร
+กันตพัฒน์	อนุศักดิ์เสถียร	บุคลากรคณะสังคมศาสตร์
+Joseph	SHANAHAN	บุคคลทั่วไป
+Nanteetip	Limpeanchob	บุคลากรมหาวิทยาลัยนเรศวร
+นางสาวนิภาพร	เทียบภูเขียว	บุคคลทั่วไป
+ด.ช.นัธทวัฒน์	หมอนคำ	บุคคลทั่วไป
+ธเนศ	ยายอด	ศิษย์เก่าคณะสังคมศาสตร์
+ณัฐพงศ์	อุ่นสา	นิสิตมหาวิทยาลัยนเรศวร
+สุชาดา	เชื้อม่วง	บุคลากรคณะสังคมศาสตร์
+อนันต์ยศ	จำปาดิษฐ์	นิสิตคณะสังคมศาสตร์
+กฤติธนัฐ	สายคำทอน	บุคคลทั่วไป
+กฤติธภรณ์	สายคำทอน	บุคคลทั่วไป
+ปวีณา	สายคำทอน	บุคคลทั่วไป
+กฤษณะ	สายคำทอน	บุคคลทั่วไป
+สมฤดี	สังข์แก้ว	นิสิตคณะสังคมศาสตร์
+อิทธิเทพ	อ่อนปาน	บุคลากรมหาวิทยาลัยนเรศวร
+บุญเลิศ	อ่อนปาน	บุคคลทั่วไป
+ถาวร	เลิศประกายรัตน์	บุคคลทั่วไป
+ชยกฤต	ฮาวกันทะ	บุคคลทั่วไป
+ดารุณี	ฮาวกันทะ	บุคลากรมหาวิทยาลัยนเรศวร
+เบญญาภา	ฮาวกันทะ	บุคคลทั่วไป
+ภัทรพล	นิทากร	นิสิตมหาวิทยาลัยนเรศวร
+สุชานันท์	จันทร์ทรง	บุคคลทั่วไป
+ด.ช	ธีรพิชญ์	บุคคลทั่วไป
+วรัญญา	สารวิทย์	บุคลากรมหาวิทยาลัยนเรศวร
+รุสนา	ล่าบุรี	บุคลากรมหาวิทยาลัยนเรศวร
+ธนัชพร	ชื่นเกษร	บุคลากรมหาวิทยาลัยนเรศวร
+ณภัทร	เหรียญทอง	นิสิตมหาวิทยาลัยนเรศวร
+ชัชวุฒิ	วัชโรทัย	บุคคลทั่วไป
+ภิชาดา	สุธรรม	นิสิตมหาวิทยาลัยนเรศวร
+ปัณณธร	ไตรภพ	ศิษย์เก่ามหาวิทยาลัยนเรศวร
+ธัญวุฒิ	พุทธรอด	นิสิตคณะสังคมศาสตร์
+นายชนินทร์	นวนิตย์วรานนท์	นิสิตคณะสังคมศาสตร์
+วรพงศ์	ทองทุ่ง	ศิษย์เก่ามหาวิทยาลัยนเรศวร
+จริยา	วสยางกูร	ศิษย์เก่าคณะสังคมศาสตร์
+ณัฏฐณิชา	กองโยน	บุคคลทั่วไป
+กมลลักษณ์	กองโยน	บุคคลทั่วไป
+Warunee	Tasuree	ศิษย์เก่ามหาวิทยาลัยนเรศวร
+Khemmarat	Ainyu	บุคคลทั่วไป
+สวิชญาพร	เจิมนิ่ม	ศิษย์เก่ามหาวิทยาลัยนเรศวร
+Nattida	Chitkamnerd	ศิษย์เก่ามหาวิทยาลัยนเรศวร
+ศิริลักษณ์	นวลทิม	บุคคลทั่วไป
+Kessuda	Inchai	ศิษย์เก่าคณะสังคมศาสตร์
+ศิรศักดิ์	ศิลพร	บุคคลทั่วไป
+ณัฐกุล	ครุฑวิเศษ	บุคคลทั่วไป
+Nattanan	Chitkamnoet	ศิษย์เก่ามหาวิทยาลัยนเรศวร
+Nattida	Duangjampa	นิสิตมหาวิทยาลัยนเรศวร
+ณัฐโรจน์	พิษณุนาวิน	บุคลากรคณะสังคมศาสตร์
+ปริศนา	เจริญพร	บุคลากรมหาวิทยาลัยนเรศวร
+สุขุมาล	นิยมธรรม	บุคลากรมหาวิทยาลัยนเรศวร
+ภูปกรณ์	กาละภักดี	บุคคลทั่วไป
+บุญญาพร	อ่อนปาน	บุคคลทั่วไป
+วรัญญา	เรือนมูล	ศิษย์เก่ามหาวิทยาลัยนเรศวร
+ธนัชภัค	การะเกตุ	บุคคลทั่วไป
+ภาสกรณ์	สกุลไกรสร	บุคคลทั่วไป
+พัทธ์ธีรา	บุดดาซุย	บุคคลทั่วไป
+ณัทกร	สกุลไกรสร	บุคคลทั่วไป
+ตฤณดนัย	อสุนี	บุคลากรมหาวิทยาลัยนเรศวร
+สาโรจน์	สีละบุตร	บุคคลทั่วไป
+อนุสรา	สีหนาท	บุคคลทั่วไป
+สุภัทรชา	เรือนแก้ว	บุคคลทั่วไป
+นพวรรณ	วัชรพุทธ	บุคลากรมหาวิทยาลัยนเรศวร
+ละออ	พึ่งพันธ์	บุคคลทั่วไป
+ต้น ชาญชัย	บุดดาซุ	บุคคลทั่วไป
+ธนัฏฐา	มหายศนันท์	ศิษย์เก่าคณะสังคมศาสตร์
+นิชาภา	ตันติวิวัฒน์วงศ์	บุคคลทั่วไป
+กมลวรรณ	ปานแสง	บุคคลทั่วไป
+Kiattipoom	Jiwanatsiri	ศิษย์เก่ามหาวิทยาลัยนเรศวร
+Nattita	Srichomthong	นิสิตมหาวิทยาลัยนเรศวร
+นภดล	ปุกแก้ว	บุคลากรมหาวิทยาลัยนเรศวร
+จุฑาทิพย์	ไชยประเทศ	ศิษย์เก่ามหาวิทยาลัยนเรศวร
+นัฐพงศ์	เขียวใจดี	บุคคลทั่วไป
+จำเลียง	รอดทองดี	บุคคลทั่วไป
+ชัยประสิทธิ์	ก้อนคง	บุคคลทั่วไป
+RATTAPAT	PANSANG	บุคคลทั่วไป
+สายคม	กันธง	บุคคลทั่วไป
+ศราวุธ	ชมเชย	บุคคลทั่วไป
+KAMONWAN	PANSANG	บุคคลทั่วไป
+เกศรินทร์	ทิพย์เพ็ชร์	นิสิตมหาวิทยาลัยนเรศวร
+สิทธิโชค	อินทร์สิงห์	บุคคลทั่วไป
+ยรรยง	บุญธิรัศมี	บุคคลทั่วไป
+ณัฐเกียรติ	เจริญสุข	บุคลากรมหาวิทยาลัยนเรศวร
+Sarawut	Srihata	นิสิตมหาวิทยาลัยนเรศวร
+Jednipat	Soma	นิสิตมหาวิทยาลัยนเรศวร
+Pattarapong	Comephay	นิสิตมหาวิทยาลัยนเรศวร
+Wirithada	Jantapo	นิสิตมหาวิทยาลัยนเรศวร
+นายศิรสิทธิ์	สามี	นิสิตมหาวิทยาลัยนเรศวร
+ศักดิพัฒน์	พันธุ์ไกร	นิสิตมหาวิทยาลัยนเรศวร
+ธัญลักษณ์	ทองศรี	ศิษย์เก่ามหาวิทยาลัยนเรศวร
+Jongrak	Attarat	บุคลากรมหาวิทยาลัยนเรศวร
+ชัชวาล	คั้มช้าง	นิสิตคณะสังคมศาสตร์
+พิพัฒน์	ไพรสวัสดิ์	นิสิตคณะสังคมศาสตร์
+นางสาว นฤมล	กิจการ	นิสิตมหาวิทยาลัยนเรศวร
+ประกิต	สารไธสงค์	นิสิตคณะสังคมศาสตร์
+ดนุพล	ยิ่งนิยม	บุคลากรมหาวิทยาลัยนเรศวร
+Jettarin	Daengchot	บุคคลทั่วไป
+Thanapat	Ratsamee	ศิษย์เก่ามหาวิทยาลัยนเรศวร
+พงศธร	โสภาพร	บุคคลทั่วไป
+ธนวัฒน์	เนียมชาวนา	บุคคลทั่วไป
+ภัทราพร	ฉิมปรางค์	บุคคลทั่วไป
+บุศกร	รักแจ้ง	บุคคลทั่วไป
+ภัทรกร	สุพรรณสาย	บุคคลทั่วไป
+Phumpasit	Phanphum	บุคคลทั่วไป
+นภสร	ภาคศิริ	บุคคลทั่วไป
+ณิชกานต์	สิงหา	บุคคลทั่วไป
+Nuengruetai	Songput	บุคคลทั่วไป
+นางจารุวรรณ	เปี้ยจันทึก	บุคคลทั่วไป
+ปิณจ์ฑิรา	การะเกตุ	บุคลากรมหาวิทยาลัยนเรศวร
+Parichat	Wijitpongsa	ศิษย์เก่ามหาวิทยาลัยนเรศวร
+ชิษณุศักดิ์	ภาณุภาสจิตติพงศ์	บุคลากรมหาวิทยาลัยนเรศวร
+สาวิตรี	มั่นคง	บุคคลทั่วไป
+พีรวัฒน์	จันทร์หอกลอง	บุคคลทั่วไป
+อัญชิสา	อรุญมาศ	บุคลากรมหาวิทยาลัยนเรศวร
+ธีรพล	ปางทอง	บุคคลทั่วไป
+นพมาศ	อ่ำอำไพ	บุคลากรคณะสังคมศาสตร์
+กัญญ์พชิรา	กิติคุณภิวัฒน์	บุคคลทั่วไป
+ธนภวิษย์	กิติคุณภิวัฒน์	บุคคลทั่วไป
+Natmatar	Jitkumnurd	ศิษย์เก่ามหาวิทยาลัยนเรศวร
+กำพล	กิ้กสันเทีย	บุคลากรคณะสังคมศาสตร์
+กษิมาทิพย์	พิพัฒน์ศาสตร์	บุคลากรคณะสังคมศาสตร์
+กมลลักษณ์	คำนุช	นิสิตมหาวิทยาลัยนเรศวร
+ธนัตถ์นันท์	พิชญวิวัฒน์	บุคลากรมหาวิทยาลัยนเรศวร
+สุเทพ	อยู่เย็น	บุคลากรมหาวิทยาลัยนเรศวร
+วสุธร	อยู่เย็น	บุคคลทั่วไป
+วนัชภรณ์	หนูจ่าแสง	บุคลากรมหาวิทยาลัยนเรศวร
+จุฑามาศ	อ่องเภา	ศิษย์เก่ามหาวิทยาลัยนเรศวร
+ชุติกาญจน์	แก้วสะอาด	บุคคลทั่วไป
+Phummirit	Yusabai	นิสิตมหาวิทยาลัยนเรศวร
+วิมลสิริ	ขุลิลัง	นิสิตมหาวิทยาลัยนเรศวร
+นัทธี	มกรเสน	นิสิตมหาวิทยาลัยนเรศวร
+MINGKHWAN	MAGJEEN	บุคคลทั่วไป
+ชนิดาภา	ทะจะกัน	นิสิตมหาวิทยาลัยนเรศวร
+พรรณธิพร	บุญก่อน	บุคคลทั่วไป
+ธานินทร์	บุญก่อน	บุคคลทั่วไป
+วรวุฒิ	เกรียงไกร	ศิษย์เก่ามหาวิทยาลัยนเรศวร
+ปฐมพร	วิรัชกุล	บุคคลทั่วไป
+Nattawut	Khadsee	บุคคลทั่วไป
+ประชาลักษ์	ภัทรโชติโภคิน	บุคคลทั่วไป
+สุรพัศ	เคยทำ	บุคคลทั่วไป
+Manusak	Tubpimon	บุคคลทั่วไป
+นาย พสุมนต์	ชัยฤทธิ์	บุคคลทั่วไป
+ฉันทชา	ตั้งสืบพงษ์	นิสิตมหาวิทยาลัยนเรศวร
+Russel Amosco	Cada	บุคคลทั่วไป
+Daisy	Gonzales	บุคลากรมหาวิทยาลัยนเรศวร
+ชณัฐธนพล	เย็นอยู่	บุคลากรมหาวิทยาลัยนเรศวร
+ชาลิมา	พูลศรี	บุคคลทั่วไป
+อดินันท์	เคียงคู่	บุคคลทั่วไป
+ธัญญาลักษณ์	ปัญญาวุฒิ	บุคคลทั่วไป
+ทิพวรรณ	มีชิน	บุคคลทั่วไป
+บดินทร์เดช	ธูปหอม	ศิษย์เก่ามหาวิทยาลัยนเรศวร
+สุภัทรา	เจียงพิจิตร	บุคคลทั่วไป
+กฤษฎิ์ธนทัต	ธูปหอม	บุคคลทั่วไป
+ณัฐชา	ไขว้เครือ	บุคลากรมหาวิทยาลัยนเรศวร
+ธนากร	ปาตีคำ	นิสิตมหาวิทยาลัยนเรศวร
+อานนท์	ขันทอง	บุคคลทั่วไป
+ณัฐนันท์	นันทชัย	บุคลากรมหาวิทยาลัยนเรศวร
+ฐานิดา	ชูสุวรรณ์	บุคคลทั่วไป
+นลินลฎา	นันทชัย	บุคคลทั่วไป
+นายศิวัฒน์	คำสายอินทร์	นิสิตมหาวิทยาลัยนเรศวร
+กรวุฒิ	สุพรรณสาย	บุคคลทั่วไป
+อาทิตย์	เมฆพัฒน์	บุคคลทั่วไป
+วนมาลินทร์	มหะพันธ์	บุคลากรคณะสังคมศาสตร์
+ด.ช.ภูมินลินทร์	มหะพันธ์	บุคลากรคณะสังคมศาสตร์
+อนุวัต	ขำศิริ	นิสิตมหาวิทยาลัยนเรศวร
+พิพัฒน์พร	พวงพี่	บุคคลทั่วไป
+Banyat	Kongkaew	บุคคลทั่วไป
+Natagon	Sarasiri	บุคคลทั่วไป
+Natamon	Sarasiri	บุคคลทั่วไป
+ทรงวุฒิ	ทิอ่อน	บุคลากรมหาวิทยาลัยนเรศวร
+จักรพงษ์	ทนุเสริม	บุคคลทั่วไป
+ธณภณ	สถาวรวณิช	บุคคลทั่วไป
+ธวัชชัย	สถาวรวณิช	บุคคลทั่วไป
+นันทรักษ์	เพ็งศิริ	บุคลากรคณะสังคมศาสตร์
+ธวัชชัย	ยิ้มณรงค์	บุคคลทั่วไป
+นายภาสกร	สนคง	นิสิตคณะสังคมศาสตร์
+จิรัชญา	พัทวี	นิสิตมหาวิทยาลัยนเรศวร
+ปุญญาดา	เพลิดเพลิน	นิสิตมหาวิทยาลัยนเรศวร
+วุฒิชัย	แซ่อึ้ง	บุคลากรมหาวิทยาลัยนเรศวร
+อนิรุทธิ์	นรายศ	บุคลากรมหาวิทยาลัยนเรศวร
+นาย จิรภัทร	องอาจ	นิสิตมหาวิทยาลัยนเรศวร
+ณัฐชัย	อ่ำทอง	บุคลากรมหาวิทยาลัยนเรศวร
+จันทรถวิล	สุขเจริญ	บุคคลทั่วไป
+อาทิตยา	ประกาศสัจธรรม	บุคคลทั่วไป
+กีรติ	รัตนา	บุคคลทั่วไป
+สมพร	เปรมลาภ	บุคคลทั่วไป
+รภัทภร	มาอยู่	นิสิตมหาวิทยาลัยนเรศวร
+กรินทร์	บุญด้วง	นิสิตมหาวิทยาลัยนเรศวร
+จิรภัทร	แสนยศ	บุคลากรมหาวิทยาลัยนเรศวร
+วิมลสิริ	เกิดบุญ	นิสิตคณะสังคมศาสตร์
+ชิตณรงค์	คล้ายท่าโรง	บุคคลทั่วไป
+ลัทธพล	พงษ์ภักดี	นิสิตมหาวิทยาลัยนเรศวร
+ชนาธิป	ขันธวุธ	บุคลากรมหาวิทยาลัยนเรศวร
+Nay Myo Min	ดิน	นิสิตมหาวิทยาลัยนเรศวร
+สมฤทัย	เกื้อทาน	บุคคลทั่วไป
+บุษยา	เกตุอุดม	บุคคลทั่วไป
+พิชัย	เกตุอุดม	บุคคลทั่วไป
+สุนิสา	สีทุ่งลือ	บุคลากรมหาวิทยาลัยนเรศวร
+สมิตานัน	เกตุอุดม	ศิษย์เก่ามหาวิทยาลัยนเรศวร
+ไพจิตรา	มาบัว	บุคลากรมหาวิทยาลัยนเรศวร
+ณัฐิณี	มณีท่าโพธิ์	บุคลากรมหาวิทยาลัยนเรศวร
+พิชยา	เกตุอุดม	บุคคลทั่วไป
+กัณฑชาติ	อินต๊ะกัน	บุคคลทั่วไป
+นิตธิศักดิ์	ชูสาย	บุคลากรมหาวิทยาลัยนเรศวร
+สุรีรัตน์	คุ้มอินทร์	บุคลากรมหาวิทยาลัยนเรศวร
+พิษณุ	มาอินทร์	บุคคลทั่วไป
+นิรุทธ์	ภู่เมือง	นิสิตมหาวิทยาลัยนเรศวร
+Netdao	Chaidi	นิสิตมหาวิทยาลัยนเรศวร
+กรวิชญ์	พลจร	นิสิตมหาวิทยาลัยนเรศวร
+Bunphot	Chaiyasane	ศิษย์เก่ามหาวิทยาลัยนเรศวร
+นุชนพัฒน์	จอมสืบ	ศิษย์เก่าคณะสังคมศาสตร์
+กันตพัฒน์	ปะละสี	บุคคลทั่วไป
+จอมเดช	จอมสืบ	บุคคลทั่วไป
+อารี	ทองทุ่ง	บุคลากรมหาวิทยาลัยนเรศวร
+ศศิประภา	ลิ้มศิริลักษณ์	บุคลากรมหาวิทยาลัยนเรศวร
+วิทวัส	กลิ่นขำ	ศิษย์เก่ามหาวิทยาลัยนเรศวร
+สมศักดิ์	กันทะวงศ์	บุคคลทั่วไป
+ปุญญาภัทร์	สอนง่ายดี	บุคคลทั่วไป
+จริงใจ	ไม่ไก่กา	บุคคลทั่วไป
+Ketklao	Phromprae	บุคคลทั่วไป
+ปทุมรัตน์	ตั้งนพรัตน์	บุคลากรมหาวิทยาลัยนเรศวร
+จาตุรงค์	เพิ่มเจริญ	บุคคลทั่วไป
+ก้องภพ	เพิ่มเจริญ	บุคคลทั่วไป
+Somkiat	Raggoon	นิสิตมหาวิทยาลัยนเรศวร
+ขวัญแก้ว	ลอนลับ	บุคลากรมหาวิทยาลัยนเรศวร
+Rey	Pagss	บุคคลทั่วไป
+ARNON	SIRIKHWAN	ศิษย์เก่ามหาวิทยาลัยนเรศวร
+ชยพล	ฉัตรบรพัตร	ศิษย์เก่ามหาวิทยาลัยนเรศวร
+JIRAPORN	JOOLAPHAN	บุคคลทั่วไป
+พรรษพร	สารีผล	บุคคลทั่วไป
+พิชิตชัย	ปิมแปง	บุคคลทั่วไป
+อวยพร	ดำริมุ่งกิจ	บุคคลทั่วไป
+Yuttapong	Kanjanakosoom	บุคคลทั่วไป
+วลัยลักษณ์	ดอนจักร	บุคลากรมหาวิทยาลัยนเรศวร
+กัญญาณัฐ	สีนิวาส	บุคลากรมหาวิทยาลัยนเรศวร
+POPPLOY	ANEKRATTANASUB	บุคคลทั่วไป
+WANTANEE	WANGKRASAE	บุคคลทั่วไป
+PURACHET	ANEKRATTANASUB	บุคคลทั่วไป
+สลิลญา	อังเพชร	นิสิตมหาวิทยาลัยนเรศวร
+ขวัญชัย	รัตนมณี	บุคลากรมหาวิทยาลัยนเรศวร
+นายสิรภัทร	คงดี	นิสิตคณะสังคมศาสตร์
+พีชชรัตน์	มีประไพ	บุคลากรมหาวิทยาลัยนเรศวร
+ณัฐพล	สุขม่วง	ศิษย์เก่ามหาวิทยาลัยนเรศวร
+Nattinan	Raksakaew	นิสิตมหาวิทยาลัยนเรศวร
+WICHIT	POSRI	บุคคลทั่วไป
+เป็นเอก	จำปาดิบ	บุคลากรมหาวิทยาลัยนเรศวร
+สุรีรัตน์	ธรรมเจริญ	บุคคลทั่วไป
+ฤทัยรัตน์	ครุฑวิเศษ	บุคคลทั่วไป
+Tanalak	Limsirilak	ศิษย์เก่ามหาวิทยาลัยนเรศวร
+เอมอร	สารเถื่อนแก้ว	บุคลากรมหาวิทยาลัยนเรศวร
+อรอนงค์	เทียมแสง	บุคคลทั่วไป
+Thayaret	Phichetthaworn	บุคคลทั่วไป
+ปัญจพล	นิติพจน์	บุคคลทั่วไป
+วรยุทธ	พิเคราะห์	บุคคลทั่วไป
+ชิดพันธ์	ตันติมังกร	บุคคลทั่วไป
+ธีรัตต์	นิไทรโยค	บุคคลทั่วไป
+Natthapoom	Duangdaeng	บุคคลทั่วไป
+ทัชชานนท์	เงี้ยวเกิด	บุคคลทั่วไป
+ชาริณี	ด่อนดี	ศิษย์เก่ามหาวิทยาลัยนเรศวร
+ธาดา	เสรีบุตร	บุคคลทั่วไป
+ชนธรรม	ด่อนดี	บุคคลทั่วไป
+สุทธิวรรณ	ประเสริฐศรี	บุคคลทั่วไป
+ชวัลนุช	น้อยมี	บุคคลทั่วไป
+ด.ช. มงคลกรณ์	อยู่ประเสริฐ	บุคคลทั่วไป
+รัชชานนท์	น้ำเพชร	บุคคลทั่วไป
+ปุณยนุช	ธรรมอาชีพ	นิสิตมหาวิทยาลัยนเรศวร
+Manlika	Sriondee	ศิษย์เก่ามหาวิทยาลัยนเรศวร
+ศศิญาพัชร	ศิริเสถียร	นิสิตมหาวิทยาลัยนเรศวร
+ธานารัฐ	เจริญภาพ	นิสิตมหาวิทยาลัยนเรศวร
+กนกวรรณ	สุวรรณวัจน์	บุคคลทั่วไป
+นิพิฐพนธ์	ตราปัญญา	นิสิตมหาวิทยาลัยนเรศวร
+โฟร์	.	ศิษย์เก่าคณะสังคมศาสตร์
+ศุภิสรา	บำรุงดี	นิสิตมหาวิทยาลัยนเรศวร
+อธิวัฒน์	ผลากอง	ศิษย์เก่าคณะสังคมศาสตร์
+ดวงชนก	ตันเยี่ยน	ศิษย์เก่ามหาวิทยาลัยนเรศวร
+ต่อสกุล	สาเสาร์	ศิษย์เก่ามหาวิทยาลัยนเรศวร
+พิมทิพย์	ยาตรา	บุคคลทั่วไป
+รณชัย	อินมะณี	บุคคลทั่วไป
+ภัทรสุดา	มณี	บุคคลทั่วไป
+อริย์ธัช	บุญประเสริฐ	ศิษย์เก่าคณะสังคมศาสตร์
+พิศุทธิ์ฎาภา	คำเมือง	บุคลากรมหาวิทยาลัยนเรศวร
+Anon	Waraphok	นิสิตมหาวิทยาลัยนเรศวร
+ผกามาศ	คร้ามสมอ	บุคคลทั่วไป
+ยงยุทธ	บ่อแก้ว	บุคลากรมหาวิทยาลัยนเรศวร
+นางอทิตยา	ลีละเศรษฐกุล	ศิษย์เก่ามหาวิทยาลัยนเรศวร
+ด.ญ.กชมน	ลีละเศรษฐกุล	บุคคลทั่วไป
+อาทิตยา	แสงเทียย	บุคคลทั่วไป
+ศักดิ์ชัย	สังข์ศิริ	บุคลากรคณะสังคมศาสตร์
+กมล	ไม้กร่าง	บุคลากรมหาวิทยาลัยนเรศวร
+วิภาดา	บุญส่งแท้	บุคลากรมหาวิทยาลัยนเรศวร
+นภาภรณ์	เพ็งพันธุ์	นิสิตมหาวิทยาลัยนเรศวร
+Natthavadh	LK.	นิสิตมหาวิทยาลัยนเรศวร`;
+
+function parseTSV(raw){
+  const lines = raw.split(/\r?\n/).filter(Boolean);
+  const header = lines.shift().split('\t');
+  const keyFirst = header[0];
+  const keyLast  = header[1];
+  // หา header ของหมวดหมู่แบบยืดหยุ่น (รองรับทั้งไทย/อังกฤษ)
+  const keyCat = header.find(h => /ประเภทผู้รับสมัคร|Applicant Categories/i.test(h)) || header[2];
+  const rows = [];
+  for (const line of lines){
+    const cols = line.split('\t');
+    const first = (cols[0]||'').trim();
+    const last  = (cols[1]||'').trim();
+    const cat   = (cols[header.indexOf(keyCat)]||'').trim();
+    const full  = [first,last].filter(Boolean).join(' ').replace(/\s+/g,' ').trim();
+    if (!full) continue;
+    rows.push({ first_name:first, last_name:last, full_name:full, category: cat || 'ไม่ระบุ' });
+  }
+  return rows;
+}
+
+const REGISTRANTS = parseTSV(RAW_TSV); // ✅ Array of objects
+
+// ====== Utilities ======
+const $ = sel => document.querySelector(sel);
+const $$ = sel => Array.from(document.querySelectorAll(sel));
+const norm = s => (s||'').toString().trim().toLowerCase().replace(/\s+/g,' ');
+const debounce = (fn, ms=180) => { let t; return (...a)=>{ clearTimeout(t); t=setTimeout(()=>fn(...a), ms); } };
+const on = (sel, evt, fn) => { const el = $(sel); if (el) el.addEventListener(evt, fn); } // ✅ ป้องกัน null
+
+// ====== State ======
+let state = {
+  q: new URLSearchParams(location.search).get('q') || '',
+  cat: new URLSearchParams(location.search).get('cat') || '',
+  page: +(new URLSearchParams(location.search).get('page') || 1),
+  perPage: 50,
+};
+
+// ====== Init ======
+function init() {
+  // fill controls from state
+  $('#q').value = state.q;
+  // categories
+  const cats = Array.from(new Set(REGISTRANTS.map(r => (r.category||'').trim()).filter(Boolean))).sort((a,b)=>a.localeCompare(b,'th'));
+  for (const c of cats) {
+    const opt = document.createElement('option');
+    opt.value = c; opt.textContent = c; $('#cat').appendChild(opt);
+  }
+  $('#cat').value = state.cat;
+
+  // listeners (ใช้ helper on เพื่อไม่พังหาก element ไม่มี)
+  on('#q','input', debounce(onSearch));
+  on('#cat','change', onSearch);
+  on('#btnClear','click', ()=>{ if(!$('#q')||!$('#cat')) return; $('#q').value=''; $('#cat').value=''; state.q=''; state.cat=''; state.page=1; render(); pushState(); });
+  on('#btnPrint','click', ()=>window.print());
+  on('#btnExport','click', exportCSV);
+
+  render();
+  runTests();
+}
+
+function pushState(){
+  const params = new URLSearchParams();
+  if (state.q) params.set('q', state.q);
+  if (state.cat) params.set('cat', state.cat);
+  if (state.page && state.page!==1) params.set('page', state.page);
+  const qs = params.toString();
+  history.replaceState(null, '', qs? ('?'+qs) : location.pathname);
+}
+
+function onSearch(){
+  state.q = $('#q')? $('#q').value : ''; 
+  state.cat = $('#cat')? $('#cat').value : ''; 
+  state.page=1; render(); pushState();
+}
+
+function filter(data){
+  let out = data;
+  const q = norm(state.q);
+  if (q) out = out.filter(r => norm(r.full_name).includes(q));
+  if (state.cat) out = out.filter(r => (r.category||'') === state.cat);
+  return out;
+}
+
+function paginate(arr){
+  const total = arr.length; const pages = Math.max(1, Math.ceil(total/state.perPage));
+  state.page = Math.min(Math.max(1, state.page), pages);
+  const start = (state.page-1)*state.perPage;
+  return { total, pages, slice: arr.slice(start, start+state.perPage), start };
+}
+
+function render(){
+  // Stats by category
+  const catCount = Object.entries(REGISTRANTS.reduce((a,r)=>{ const k=(r.category||'ไม่ระบุ'); a[k]=(a[k]||0)+1; return a; },{})).sort((a,b)=>a[0].localeCompare(b[0],'th'));
+  $('#stats').innerHTML = catCount.map(([k,v])=>`<div class="stat">${k}: <strong>${v.toLocaleString('th-TH')}</strong></div>`).join('');
+  $('#totalTag').textContent = `รวม ${REGISTRANTS.length.toLocaleString('th-TH')} รายชื่อ`;
+
+  const filtered = filter(REGISTRANTS);
+  const { pages, slice, start } = paginate(filtered);
+
+  const rows = slice.map((r,i)=>`<tr>
+      <td>${(start+i+1).toLocaleString('th-TH')}</td>
+      <td>${escapeHtml(r.full_name)}</td>
+      <td><span class="pill">${escapeHtml(r.category||'ไม่ระบุ')}</span></td>
+    </tr>`).join('');
+  $('#tbl tbody').innerHTML = rows || `<tr><td colspan="3" style="color:#9aa4b2;padding:18px">ไม่พบผลลัพธ์ที่ตรงกับเงื่อนไข</td></tr>`;
+
+  // pager
+  const pager = [];
+  const prev = `<button class="secondary" ${state.page<=1?'disabled':''} data-act="prev">ก่อนหน้า</button>`;
+  const next = `<button class="secondary" ${state.page>=pages?'disabled':''} data-act="next">ถัดไป</button>`;
+  pager.push(prev);
+  pager.push(`<span class="tag">หน้า <span class="count">${state.page}</span> / ${pages}</span>`);
+  pager.push(next);
+  $('#pager').innerHTML = pager.join('');
+  $('#pager').onclick = (e)=>{
+    if (e.target.matches('button[data-act="prev"]')) { state.page--; render(); pushState(); }
+    if (e.target.matches('button[data-act="next"]')) { state.page++; render(); pushState(); }
+  };
+}
+
+function exportCSV(){
+  const filtered = filter(REGISTRANTS);
+  const lines = [ ['No','Full Name','Category'] ].concat(filtered.map((r,i)=>[i+1, r.full_name, r.category]));
+  const csv = lines.map(row => row.map(x=>`"${(x??'').toString().replace(/"/g,'""')}"`).join(',')).join('\n');
+  const blob = new Blob(["\ufeff" + csv], {type: 'text/csv;charset=utf-8;'}); // BOM for Excel
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'FSS_Halloween_2025_registrants.csv'; a.click();
+  URL.revokeObjectURL(url);
+}
+
+function escapeHtml(s){
+  return (s??'').toString().replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[m]));
+}
+
+// ====== Tests ======
+function t(name, cond){
+  const li = document.createElement('li');
+  li.textContent = (cond? 'PASS: ':'FAIL: ') + name;
+  li.className = cond? 'test-pass':'test-fail';
+  document.getElementById('testList').appendChild(li);
+  if (!cond) console.error('Test failed:', name);
+}
+
+function runTests(){
+  // 1) โครงสร้างข้อมูล
+  t('REGISTRANTS เป็น Array', Array.isArray(REGISTRANTS));
+  t('REGISTRANTS มีจำนวนมากกว่า 100', REGISTRANTS.length > 100);
+
+  // 2) ฟิลด์สำคัญ
+  const s0 = REGISTRANTS[0] || {};
+  t('มีฟิลด์ full_name', typeof s0.full_name === 'string');
+  t('มีฟิลด์ category', 'category' in s0);
+
+  // 3) ตัวอย่างชื่อที่ควรพบ
+  t('พบชื่อ Kitti Santipong', REGISTRANTS.some(r => r.full_name.includes('Kitti Santipong')));
+  t('พบชื่อ ประไพพรรณ สายวงค์ปัญญา', REGISTRANTS.some(r => r.full_name.includes('ประไพพรรณ สายวงค์ปัญญา')));
+
+  // 4) ปุ่มและ event listeners ไม่พังเมื่อ element ไม่มี
+  t('#btnClear มีอยู่ใน DOM', !!document.getElementById('btnClear'));
+  t('#btnExport มีอยู่ใน DOM', !!document.getElementById('btnExport'));
+  t('#btnPrint มีอยู่ใน DOM', !!document.getElementById('btnPrint'));
+
+  // 5) การกรองหมวดหมู่
+  t('มีหมวดหมู่เกี่ยวกับมหาวิทยาลัยนเรศวร', REGISTRANTS.some(r => /มหาวิทยาลัยนเรศวร/.test(r.category||'')));
+}
+
+// Boot
+init();
+</script>
+</body>
+</html>
